@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<properties resource="application.properties" />
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+		<!-- defaultModelType="flat" 复合主键不生成主键类 -->
+		<!-- <context id="DB2Tables" defaultModelType="flat" targetRuntime="MyBatis3"> -->
+		<!-- 配置内置的或者自定义的Plugin -->
+		<plugin type="com.mrk.assist.util.generator.BaseDaoGeneratorPlugin" /> 
+		<commentGenerator> <!-- 将数据库中表的字段描述信息添加到注释 -->
+			<property name="addRemarkComments" value="true" /> <!-- 注释里不添加日期 --> 
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		<!-- 数据库连接，直接通过${}读取application.properties里的配置 -->
+		<jdbcConnection
+			driverClass="${spring.datasource.driver-class-name}"
+			connectionURL="${spring.datasource.url}"
+			userId="${spring.datasource.username}"
+			password="${spring.datasource.password}" />
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+		<!-- JavaBean -->
+		<javaModelGenerator targetPackage="com.mrk.sys.entity"
+			targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<!-- mapper接口 -->
+		<sqlMapGenerator targetPackage="mapper"
+			targetProject="src/main/resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+		<!-- dao -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.mrk.sys.dao" targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		<table tableName="LOGIN_TICKET" domainObjectName="LoginTicket"></table>
+
+		<!-- 不生成 Example类 <table tableName="ACCOUNT" domainObjectName="Account" 
+			enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" 
+			enableSelectByExample="false" selectByExampleQueryId="false"> </table> -->
+	</context>
+</generatorConfiguration>
