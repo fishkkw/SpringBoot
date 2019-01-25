@@ -13,10 +13,6 @@ import com.mrk.webassist.interceptor.LoginInterceptor;
 import com.mrk.webassist.interceptor.TicketInterceptor;
 import com.mrk.webassist.listener.WebHttpSessionListener;
 
-/**
- * @author mrk
- *
- */
 @Configuration
 public class WebConfigurer implements WebMvcConfigurer{
 	@Autowired
