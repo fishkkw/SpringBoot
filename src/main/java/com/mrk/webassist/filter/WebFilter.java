@@ -15,8 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory; 
 import org.springframework.stereotype.Component;
 
-//import com.fasterxml.jackson.databind.ObjectMapper;
-
 @Component
 public class WebFilter implements Filter{
 	private static final Logger LOGGER = LoggerFactory.getLogger(WebFilter.class);
@@ -45,15 +43,10 @@ public class WebFilter implements Filter{
             //首部字段用于预检请求的响应。其指明了实际请求中允许携带的首部字段
             httpServletResponse.setHeader("Access-Control-Allow-Headers", "*");
     	}
-    	//sql,xss过滤
-    	//ObjectMapper mapper=new ObjectMapper();
         HttpServletRequest httpServletRequest=(HttpServletRequest)request;
-        //LOGGER.info("CrosXssFilter.......orignal url:{},ParameterMap:{}",httpServletRequest.getRequestURI(),mapper.writeValueAsString(httpServletRequest.getParameterMap()));
         XssHttpServletRequestWrapper xssHttpServletRequestWrapper=new XssHttpServletRequestWrapper(
                 httpServletRequest);
         filterChain.doFilter(xssHttpServletRequestWrapper, response);
-        //xssHttpServletRequestWrapper.getParameterMap();
-        //LOGGER.info("CrosXssFilter..........doFilter url:{},ParameterMap:{}",xssHttpServletRequestWrapper.getRequestURI(), mapper.writeValueAsString(xssHttpServletRequestWrapper.getParameterMap()));
  	}
 	@Override
     public void destroy() {

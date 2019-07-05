@@ -1,8 +1,8 @@
 package com.mrk.webassist.interceptor;
 
 import java.lang.reflect.Method;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+//import java.time.LocalDateTime;
+//import java.time.format.DateTimeFormatter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,19 +12,33 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
 	private static final Logger LOGGER = LoggerFactory.getLogger(LoginInterceptor.class);
 	
+	/* (non-Javadoc)
+	 * @see org.springframework.web.servlet.HandlerInterceptor#postHandle(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, java.lang.Object, org.springframework.web.servlet.ModelAndView)
+	 */
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-			throws Exception { 
-		LOGGER.info("[" + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME) + "]{" + request.getRemoteAddr()
-				+ "} 执行" + getClassMethod(handler) + "[" + request.getMethod() + "]");
-
-		return HandlerInterceptor.super.preHandle(request, response, handler);
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+			ModelAndView modelAndView) throws Exception { 
+		LOGGER.info(request.getRequestURI()+"start....");
+		//LOGGER.info("[" + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME) + "]{" + request.getRemoteAddr()
+		//+ "} 执行" + getClassMethod(handler) + "[" + request.getMethod() + "] start...");
+		HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.springframework.web.servlet.HandlerInterceptor#afterCompletion(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, java.lang.Object, java.lang.Exception)
+	 */
+	@Override
+	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
+			throws Exception {
+		LOGGER.info(request.getRequestURI()+"end...");
+		HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
 	}
 
 	protected String getClassMethod(Object object) {

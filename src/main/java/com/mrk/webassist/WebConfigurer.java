@@ -1,5 +1,7 @@
 package com.mrk.webassist;
 
+import javax.servlet.Filter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
@@ -24,11 +26,10 @@ public class WebConfigurer implements WebMvcConfigurer{
 	@Autowired
 	private WebHttpSessionListener httpSessionListener; 
 	
-	//过滤器注册
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	//过滤器注册 
 	@Bean
-    public FilterRegistrationBean filterRegist() { 
-		FilterRegistrationBean frBean =new FilterRegistrationBean<>();
+    public FilterRegistrationBean<Filter> filterRegist() { 
+		FilterRegistrationBean<Filter> frBean =new FilterRegistrationBean<>();
         frBean.setFilter(webFilter);
         frBean.addUrlPatterns("/*");
         frBean.setOrder(1);
@@ -42,10 +43,9 @@ public class WebConfigurer implements WebMvcConfigurer{
 		WebMvcConfigurer.super.addInterceptors(interceptorregistry); 
 	}
 	//监听器
-	@SuppressWarnings({ "rawtypes", "unchecked" })
     @Bean
-    public ServletListenerRegistrationBean listenerRegist() {
-        ServletListenerRegistrationBean srb = new ServletListenerRegistrationBean();
+    public ServletListenerRegistrationBean<WebHttpSessionListener> listenerRegist() {
+        ServletListenerRegistrationBean<WebHttpSessionListener> srb = new ServletListenerRegistrationBean<WebHttpSessionListener>();
         srb.setListener(httpSessionListener);
         return srb;
     }

@@ -58,7 +58,6 @@ public class BaseDaoGeneratorPlugin extends PluginAdapter {
 		}
 
 		FullyQualifiedJavaType fqjt = new FullyQualifiedJavaType(a);
-		// System.out.println("BaseDao<?>--"+a);
 		interfaze.addSuperInterface(fqjt);
 
 		interfaze.getMethods().clear();
