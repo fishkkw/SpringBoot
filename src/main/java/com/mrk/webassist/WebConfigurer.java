@@ -38,8 +38,8 @@ public class WebConfigurer implements WebMvcConfigurer{
 	//拦截器注册
 	@Override
 	public void addInterceptors(InterceptorRegistry interceptorregistry) {
-		interceptorregistry.addInterceptor(ticketInterceptor).addPathPatterns("/**").excludePathPatterns("/login/**").excludePathPatterns("/error");
 		interceptorregistry.addInterceptor(loginInterceptor).addPathPatterns("/**");
+		interceptorregistry.addInterceptor(ticketInterceptor).addPathPatterns("/**").excludePathPatterns("/login/**").excludePathPatterns("/error");
 		WebMvcConfigurer.super.addInterceptors(interceptorregistry); 
 	}
 	//监听器
