@@ -1,7 +1,14 @@
 package com.mrk.sys.entity;
 
-public class Account {
-    private Integer id;
+import java.io.Serializable;
+
+public class Account implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6109101334104319143L;
+
+	private Integer id;
 
     private String name;
 
