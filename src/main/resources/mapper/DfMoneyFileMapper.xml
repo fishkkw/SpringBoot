@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mrk.sys.dao.DfMoneyFileMapper">
+  <resultMap id="BaseResultMap" type="com.mrk.sys.entity.DfMoneyFile">
+    <result column="user_no" jdbcType="VARCHAR" property="userNo" />
+    <result column="mon" jdbcType="INTEGER" property="mon" />
+    <result column="mon_sn" jdbcType="INTEGER" property="monSn" />
+    <result column="group_no" jdbcType="INTEGER" property="groupNo" />
+    <result column="sn" jdbcType="INTEGER" property="sn" />
+    <result column="write_sect_no" jdbcType="VARCHAR" property="writeSectNo" />
+    <result column="write_sn" jdbcType="VARCHAR" property="writeSn" />
+    <result column="business_place_code" jdbcType="VARCHAR" property="businessPlaceCode" />
+    <result column="power_no" jdbcType="INTEGER" property="powerNo" />
+    <result column="trans_group" jdbcType="INTEGER" property="transGroup" />
+    <result column="price_code" jdbcType="VARCHAR" property="priceCode" />
+    <result column="ts_flag" jdbcType="CHAR" property="tsFlag" />
+    <result column="elec_type_code" jdbcType="VARCHAR" property="elecTypeCode" />
+    <result column="trade_type_code" jdbcType="VARCHAR" property="tradeTypeCode" />
+    <result column="ms_mode" jdbcType="CHAR" property="msMode" />
+    <result column="user_ms_type" jdbcType="CHAR" property="userMsType" />
+    <result column="write_power" jdbcType="INTEGER" property="writePower" />
+    <result column="chg_power" jdbcType="INTEGER" property="chgPower" />
+    <result column="add_power" jdbcType="INTEGER" property="addPower" />
+    <result column="kb_power" jdbcType="INTEGER" property="kbPower" />
+    <result column="share_power" jdbcType="INTEGER" property="sharePower" />
+    <result column="total_power" jdbcType="INTEGER" property="totalPower" />
+    <result column="total_money" jdbcType="INTEGER" property="totalMoney" />
+    <result column="num_money" jdbcType="INTEGER" property="numMoney" />
+    <result column="add_money1" jdbcType="INTEGER" property="addMoney1" />
+    <result column="add_money2" jdbcType="INTEGER" property="addMoney2" />
+    <result column="add_money3" jdbcType="INTEGER" property="addMoney3" />
+    <result column="add_money4" jdbcType="INTEGER" property="addMoney4" />
+    <result column="add_money5" jdbcType="INTEGER" property="addMoney5" />
+    <result column="add_money6" jdbcType="INTEGER" property="addMoney6" />
+    <result column="add_money7" jdbcType="INTEGER" property="addMoney7" />
+    <result column="add_money8" jdbcType="INTEGER" property="addMoney8" />
+    <result column="line_code" jdbcType="VARCHAR" property="lineCode" />
+    <result column="trans_no" jdbcType="VARCHAR" property="transNo" />
+    <result column="add_taxflag" jdbcType="CHAR" property="addTaxflag" />
+    <result column="write_date" jdbcType="DATE" property="writeDate" />
+    <result column="compute_date" jdbcType="DATE" property="computeDate" />
+    <result column="calculator_id" jdbcType="VARCHAR" property="calculatorId" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="user_type1" jdbcType="VARCHAR" property="userType1" />
+    <result column="rela_user_no" jdbcType="VARCHAR" property="relaUserNo" />
+    <result column="part_sn" jdbcType="INTEGER" property="partSn" />
+    <result column="have_ext" jdbcType="CHAR" property="haveExt" />
+    <result column="id_fragment" jdbcType="VARCHAR" property="idFragment" />
+    <result column="should_money" jdbcType="INTEGER" property="shouldMoney" />
+    <result column="create_date" jdbcType="DATE" property="createDate" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="warrant_no" jdbcType="INTEGER" property="warrantNo" />
+    <result column="rp_power" jdbcType="INTEGER" property="rpPower" />
+    <result column="rp_money" jdbcType="INTEGER" property="rpMoney" />
+    <result column="add_money9" jdbcType="INTEGER" property="addMoney9" />
+    <result column="add_money10" jdbcType="INTEGER" property="addMoney10" />
+    <result column="fk_flag" jdbcType="CHAR" property="fkFlag" />
+    <result column="price_mon" jdbcType="INTEGER" property="priceMon" />
+    <result column="user_type10" jdbcType="VARCHAR" property="userType10" />
+    <result column="set_address" jdbcType="VARCHAR" property="setAddress" />
+    <result column="ladder_power1" jdbcType="INTEGER" property="ladderPower1" />
+    <result column="ladder_power2" jdbcType="INTEGER" property="ladderPower2" />
+    <result column="ladder_power3" jdbcType="INTEGER" property="ladderPower3" />
+    <result column="ladder_money1" jdbcType="INTEGER" property="ladderMoney1" />
+    <result column="ladder_money2" jdbcType="INTEGER" property="ladderMoney2" />
+    <result column="ladder_money3" jdbcType="INTEGER" property="ladderMoney3" />
+    <result column="user_type9" jdbcType="VARCHAR" property="userType9" />
+    <result column="volt_level_code" jdbcType="VARCHAR" property="voltLevelCode" />
+  </resultMap>
+  <select id="selectByExample"  resultMap="BaseResultMap">
+    select * from df_money_file a where a.write_sect_no = '12613'
+  </select> 
+</mapper>

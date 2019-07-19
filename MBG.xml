@@ -5,7 +5,7 @@
 <generatorConfiguration>
 	<properties resource="application.properties" />
 	<context id="DB2Tables" targetRuntime="MyBatis3">
-		<!-- defaultModelType="flat" 复合主键不生成主键类 -->
+		<!-- defaultModelType="flat" 联合主键不生成主键类 -->
 		<!-- <context id="DB2Tables" defaultModelType="flat" targetRuntime="MyBatis3"> -->
 		<!-- 配置内置的或者自定义的Plugin -->
 		<plugin type="com.mrk.assist.util.generator.BaseDaoGeneratorPlugin" /> 
@@ -40,7 +40,7 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
-		<table tableName="LOGIN_TICKET" domainObjectName="LoginTicket"></table>
+		<table tableName="DF_MONEY_FILE" domainObjectName="DfMoneyFile"></table>
 
 		<!-- 不生成 Example类 <table tableName="ACCOUNT" domainObjectName="Account" 
 			enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" 

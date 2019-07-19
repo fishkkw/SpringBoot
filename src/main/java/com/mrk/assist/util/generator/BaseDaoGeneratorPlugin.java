@@ -12,11 +12,12 @@ import org.mybatis.generator.api.dom.java.TopLevelClass;
 import org.mybatis.generator.config.TableConfiguration;
 import org.mybatis.generator.internal.types.JavaTypeResolverDefaultImpl;
 import org.mybatis.generator.logging.Log;
-import org.mybatis.generator.logging.LogFactory;
-
-import com.mrk.sys.dao.pre.DaoPamres;
+import org.mybatis.generator.logging.LogFactory; 
 
 public class BaseDaoGeneratorPlugin extends PluginAdapter {
+	public static final String BASE_DAO="BaseDao";
+	public static final String BASE_DAOP="BaseDaoPre";
+	public static final String BASE_DAO_IMP="com.mrk.sys.dao.pre";
 	private Log logger;
 
 	@Override
@@ -29,16 +30,24 @@ public class BaseDaoGeneratorPlugin extends PluginAdapter {
 			IntrospectedTable introspectedTable) {
 		interfaze.getImportedTypes().clear();
 		List<IntrospectedColumn> Columns = introspectedTable.getPrimaryKeyColumns();
+		int knum = Columns.size();
+		if (knum == 0) {
+			try {
+				throw new Exception();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		String a, impBaseDao;
 		if (gethasEx(introspectedTable)) {
-			a = DaoPamres.BASE_DAOP + "<" + introspectedTable.getBaseRecordType() + ",";
-			impBaseDao = DaoPamres.BASE_DAO_IMP + "." + DaoPamres.BASE_DAOP;
+			a = BASE_DAOP + "<" + introspectedTable.getBaseRecordType() + ",";
+			impBaseDao = BASE_DAO_IMP + "." + BASE_DAOP;
 		} else {
-			a = DaoPamres.BASE_DAO + "<" + introspectedTable.getBaseRecordType() + ","
+			a = BASE_DAO + "<" + introspectedTable.getBaseRecordType() + ","
 					+ introspectedTable.getExampleType() + ",";
 			FullyQualifiedJavaType imp3 = new FullyQualifiedJavaType(introspectedTable.getExampleType());
 			interfaze.addImportedType(imp3);
-			impBaseDao = DaoPamres.BASE_DAO_IMP + "." + DaoPamres.BASE_DAO;
+			impBaseDao = BASE_DAO_IMP + "." + BASE_DAO;
 		}
 
 		FullyQualifiedJavaType imp = new FullyQualifiedJavaType(impBaseDao);
