@@ -5,10 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.net.URLEncoder; 
+import java.util.List; 
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,11 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.xssf.streaming.SXSSFWorkbook;
-
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;  
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -76,15 +70,41 @@ public class ExcelUtils {
 		return createExlwb(null,excel,-1);
 	}
 	
-	@SuppressWarnings("resource")
-	public static SXSSFWorkbook createExlMore(List<PoiExcel> excels) throws Exception {
-		SXSSFWorkbook wb = new SXSSFWorkbook(100);
+	/**写入excel more
+	 * @param excels
+	 * @param fileName
+	 * @throws Exception
+	 */
+	public static void createExlMore(List<PoiExcel> excels,String fileName) {
 		for(PoiExcel excel : excels) {
-			if(excel.getRows().size()>more_max) {
-				throw new Exception();
+			if(null!=excel.getRows()&&excel.getRows().size()>more_max) {
+				log.error("数据不能超过"+more_max+"条");
+				return;
 			}
 		}
-		for(int i=0;i<excels.size();i++) {
+		SXSSFWorkbook wb = null;
+		try {
+			wb = createExlMore(excels);
+		} catch (Exception e1) { 
+			e1.printStackTrace();
+		}
+		FileOutputStream fOut;
+		try {
+			fOut = new FileOutputStream(fileName);
+			writeExl(wb, fOut);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**创建wb more
+	 * @param excels
+	 * @return
+	 * @throws Exception
+	 */ 
+	public static SXSSFWorkbook createExlMore(List<PoiExcel> excels) {
+		SXSSFWorkbook wb = new SXSSFWorkbook(100);
+		for(int i=0;i<excels.size();i++) {  
 			createExlwb(wb,excels.get(i),i);
 		}
 		return wb;
@@ -97,13 +117,16 @@ public class ExcelUtils {
 	public static SXSSFWorkbook createExlwb(SXSSFWorkbook wb,PoiExcel excel,int currunt) {
 		if(null == wb) {
 			wb = new SXSSFWorkbook(100);
-		} 
+		}  
 		List<?> es = excel.getRows();
+		if(null == es) {
+			return wb;
+		}
 		Sheet sheet = null; // 工作表对象
 		int rowNo = 0; // 总行号
 		int pageRowNo = 0; // 页行号
 		Row nRow = null; // 行对象
-		Boolean flag = currunt == -1;
+		Boolean flag = currunt == -1;  
 		for (int i = 0; i < es.size(); i++) {
 			if (rowNo % one_max == 0) {
 				sheet = flag?createSheet(excel.getName(), rowNo / one_max, wb):createSheet(excel.getName(), 0, wb); 
@@ -114,7 +137,7 @@ public class ExcelUtils {
 			rowNo++;
 			nRow = sheet.createRow(pageRowNo++); // 新建行对象
 			createnCell(nRow, es.get(i));
-		}
+		} 
 		return wb;
 	}
 	
