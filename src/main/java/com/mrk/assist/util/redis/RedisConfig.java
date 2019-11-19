@@ -52,13 +52,13 @@ public class RedisConfig {
         redisTemplate.setEnableDefaultSerializer(true); 
         redisTemplate.setConnectionFactory(redisConnectionFactory); 
         redisTemplate.afterPropertiesSet();
-        log.info("RedisTemplate序列化配置，转化方式：" + genericJackson2JsonRedisSerializer.getClass().getName());
+        //log.info("RedisTemplate序列化配置，转化方式：" + genericJackson2JsonRedisSerializer.getClass().getName());
         return redisTemplate;
     }
  
     @Bean
     public JedisPool redisPoolFactory()  throws Exception{ 
-        log.info("JedisPool-init");
+        //log.info("JedisPool-init");
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
         jedisPoolConfig.setMaxIdle(maxIdle);
         jedisPoolConfig.setMaxWaitMillis(maxWaitMillis);

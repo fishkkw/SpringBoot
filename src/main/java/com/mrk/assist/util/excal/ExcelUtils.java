@@ -78,7 +78,7 @@ public class ExcelUtils {
 	public static void createExlMore(List<PoiExcel> excels,String fileName) {
 		for(PoiExcel excel : excels) {
 			if(null!=excel.getRows()&&excel.getRows().size()>more_max) {
-				log.error("数据不能超过"+more_max+"条");
+				//log.error("数据不能超过"+more_max+"条");
 				return;
 			}
 		}
